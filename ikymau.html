@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikymau Chronicles | The Legend of Rizky Maulana</title>
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --panel: #161616;
+            --border: #2a2a2a;
+            --text: #d0d0d0;
+            --text-dim: #808080;
+            --text-bright: #f0f0f0;
+            --accent: #ff6b35;
+            --accent2: #ff8c5a;
+            --gold: #f0a500;
+            --red: #e74c3c;
+            --blue: #5d9cec;
+            --green: #2ecc71;
+            --purple: #9b59b6;
+            --pink: #ff6b9d;
+            --teal: #1abc9c;
+            --orange: #f39c12;
+            --shadow: 0 8px 32px rgba(0,0,0,0.5);
+            --radius: 14px;
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            min-height: 100vh;
+            line-height: 1.7;
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(255,107,53,0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(93,156,236,0.03) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(240,165,0,0.03) 0%, transparent 60%);
+        }
+
+        .container { max-width:1000px; margin:0 auto; padding:20px; }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .header .mega-emoji { font-size: 6em; display:block; margin-bottom:15px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-25px);} }
+        .header h1 {
+            font-size: 2.8em; font-weight: 900; letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent2), var(--gold), var(--red));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px;
+        }
+        .header .subtitle { color: var(--text-dim); font-size: 1.1em; letter-spacing: 2px; }
+        .header .badge-row { display:flex; justify-content:center; gap:12px; margin-top:20px; flex-wrap:wrap; }
+        .badge {
+            display:inline-block; padding:6px 16px; border-radius:50px; font-size:0.72em;
+            letter-spacing:2px; font-weight:700; text-transform:uppercase;
+        }
+        .badge-red { background:rgba(231,76,60,0.12); color:var(--red); border:1px solid rgba(231,76,60,0.25); }
+        .badge-blue { background:rgba(93,156,236,0.12); color:var(--blue); border:1px solid rgba(93,156,236,0.25); }
+        .badge-purple { background:rgba(155,89,182,0.12); color:var(--purple); border:1px solid rgba(155,89,182,0.25); }
+        .badge-gold { background:rgba(240,165,0,0.12); color:var(--gold); border:1px solid rgba(240,165,0,0.25); }
+
+        /* ── WARNING BANNER ── */
+        .warning-banner {
+            background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.3);
+            border-radius: var(--radius); padding: 22px 28px; text-align: center; margin-bottom: 35px;
+            animation: pulse-warn 2s infinite;
+        }
+        @keyframes pulse-warn { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
+        .warning-banner .warn-text { color: var(--red); font-weight: 700; letter-spacing: 2px; font-size: 1.1em; }
+
+        /* ── STATS GRID ── */
+        .stats-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:15px; margin-bottom:40px; }
+        .stat-card {
+            background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+            padding: 20px; text-align:center; box-shadow: var(--shadow);
+        }
+        .stat-card .stat-icon { font-size: 2.2em; margin-bottom:8px; }
+        .stat-card .stat-value { font-size: 1.6em; font-weight: 900; letter-spacing: 1px; }
+        .stat-card .stat-label { font-size: 0.7em; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+        .val-red { color: var(--red); } .val-gold { color: var(--gold); } .val-blue { color: var(--blue); }
+        .val-green { color: var(--green); } .val-purple { color: var(--purple); } .val-orange { color: var(--orange); }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+            padding: 28px; box-shadow: var(--shadow); margin-bottom: 25px;
+            transition: all 0.3s; position:relative; overflow:hidden;
+        }
+        .card:hover { border-color: rgba(255,255,255,0.12); transform:translateY(-3px); }
+        .card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; }
+        .card.card-red::before { background:var(--red); }
+        .card.card-blue::before { background:var(--blue); }
+        .card.card-purple::before { background:var(--purple); }
+        .card.card-gold::before { background:var(--gold); }
+        .card.card-green::before { background:var(--green); }
+        .card.card-orange::before { background:var(--orange); }
+        .card.card-teal::before { background:var(--teal); }
+
+        .card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+        .card-icon { font-size:2em; flex-shrink:0; }
+        .card-title { font-size:1.2em; font-weight:700; letter-spacing:1px; }
+        .card-subtitle { font-size:0.78em; color:var(--text-dim); }
+
+        /* ── QUOTE ── */
+        .quote-block {
+            background: linear-gradient(135deg, rgba(240,165,0,0.06), rgba(155,89,182,0.06));
+            border:1px solid rgba(240,165,0,0.2); border-radius: var(--radius);
+            padding: 28px; text-align:center; margin-bottom:25px;
+        }
+        .quote-block .quote-text { font-size:1.2em; font-style:italic; color:var(--text-bright); letter-spacing:1px; line-height:1.8; }
+        .quote-block .quote-by { color:var(--gold); margin-top:10px; font-weight:600; letter-spacing:2px; }
+
+        /* ── LIST ── */
+        .roast-list { list-style:none; padding:0; }
+        .roast-list li {
+            padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.03);
+            color:var(--text-dim); font-size:0.92em; display:flex; align-items:flex-start; gap:10px;
+        }
+        .roast-list li::before { content:'🔥'; flex-shrink:0; font-size:1.1em; }
+        .roast-list li.gold::before { content:'💀'; }
+        .roast-list li.blue::before { content:'🎯'; }
+        .roast-list li.purple::before { content:'👀'; }
+
+        /* ── COMPARISON TABLE ── */
+        .comparison-table { width:100%; border-collapse:collapse; font-size:0.88em; margin:15px 0; }
+        .comparison-table th {
+            text-align:left; padding:12px 14px; border-bottom:2px solid var(--border);
+            color:var(--gold); letter-spacing:1.5px; font-size:0.78em; text-transform:uppercase;
+        }
+        .comparison-table td { padding:10px 14px; border-bottom:1px solid rgba(255,255,255,0.03); }
+        .comparison-table tr:hover td { background:rgba(255,255,255,0.01); }
+
+        /* ── GRID ── */
+        .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+        @media(max-width:700px){ .grid-2{grid-template-columns:1fr;} }
+
+        /* ── TIMELINE ── */
+        .timeline { position:relative; padding-left:40px; }
+        .timeline::before { content:''; position:absolute; left:17px; top:0; bottom:0; width:2px; background:var(--border); border-radius:1px; }
+        .timeline-item { position:relative; margin-bottom:22px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 22px; }
+        .timeline-item::before { content:''; position:absolute; left:-31px; top:18px; width:12px; height:12px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); }
+        .timeline-item .tl-date { font-size:0.7em; color:var(--accent); letter-spacing:2px; font-weight:700; }
+        .timeline-item .tl-title { font-weight:700; margin:4px 0; }
+
+        /* ── WAIFU CORNER ── */
+        .waifu-card {
+            background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(255,107,157,0.08));
+            border:1px solid rgba(155,89,182,0.3); border-radius:var(--radius);
+            padding:25px; text-align:center; margin-bottom:25px;
+        }
+        .waifu-card .waifu-name { font-size:1.5em; color:var(--purple); font-weight:800; letter-spacing:2px; }
+
+        /* ── FOOTER ── */
+        .footer { text-align:center; padding:40px 20px; border-top:1px solid var(--border); margin-top:50px; color:var(--text-dim); font-size:0.85em; letter-spacing:1px; }
+
+        .btn {
+            display:inline-block; padding:12px 24px; border-radius:50px; font-weight:700;
+            letter-spacing:2px; cursor:pointer; transition:0.3s; text-decoration:none; border:none;
+            font-family:var(--font); font-size:0.85em; margin:5px;
+        }
+        .btn-red { background:var(--red); color:#fff; }
+        .btn-red:hover { background:#c0392b; transform:translateY(-2px); }
+        .btn-gold { background:transparent; border:2px solid var(--gold); color:var(--gold); }
+        .btn-gold:hover { background:var(--gold); color:#000; }
+
+        .marquee-banner {
+            background:rgba(231,76,60,0.06); border-top:1px solid rgba(231,76,60,0.2);
+            border-bottom:1px solid rgba(231,76,60,0.2); padding:10px 0; overflow:hidden;
+            white-space:nowrap; margin-bottom:35px;
+        }
+        .marquee-banner span { display:inline-block; animation:marq 20s linear infinite; color:var(--red); font-weight:700; letter-spacing:1px; font-size:0.8em; }
+        @keyframes marq { 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
+
+        .highlight-box {
+            background:rgba(240,165,0,0.06); border:1px dashed rgba(240,165,0,0.3);
+            border-radius:var(--radius); padding:18px; text-align:center; margin:20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="mega-emoji">🍖</div>
+        <h1>Ikymau Chronicles</h1>
+        <p class="subtitle">The Unauthorized Biography of Rizky "Gendut" Maulana</p>
+        <div class="badge-row">
+            <span class="badge badge-red">Santri Darussalam</span>
+            <span class="badge badge-purple">Shinobu Kocho Enjoyer</span>
+            <span class="badge badge-blue">Ayanokouji Wannabe</span>
+            <span class="badge badge-gold">Pro Bulking (Katanya)</span>
+        </div>
+    </header>
+
+    <!-- WARNING MARQUEE -->
+    <div class="marquee-banner">
+        <span>PERINGATAN: Website ini mengandung fakta, sindiran, dan roasting tingkat dewa. Dibaca dengan risiko tertawa sendiri. Rizky dilarang baper. Semua kejadian berdasarkan kisah nyata yang agak dilebih-lebihkan. Shinobu Kocho tidak akan datang menyelamatkanmu. Mulai olahraga, Ky!</span>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-value val-red">90kg+</div>
+            <div class="stat-label">Berat Badan (Estimasi Rendah)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🍜</div>
+            <div class="stat-value val-gold">∞</div>
+            <div class="stat-label">Kapasitas Makan</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🏃</div>
+            <div class="stat-value val-red">0.1 km</div>
+            <div class="stat-label">Jarak Maksimal Lari</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">💪</div>
+            <div class="stat-value val-red">0</div>
+            <div class="stat-label">Pull Up Maksimal</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🤸</div>
+            <div class="stat-value val-red">0</div>
+            <div class="stat-label">Sit Up Maksimal</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-value val-blue">999+</div>
+            <div class="stat-label">Alasan Menunda Olahraga</div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: BIOGRAFI SINGKAT -->
+    <div class="card card-red">
+        <div class="card-header">
+            <div class="card-icon">📜</div>
+            <div><div class="card-title">Asal-Usul Sang Legenda</div><div class="card-subtitle">Dari SMK ke Pesantren: Plot Twist Tak Terduga</div></div>
+        </div>
+        <p style="color:var(--text-dim);">
+            <strong>Rizky Maulana</strong>, atau yang akrab dipanggil <strong>Ikymau</strong> oleh satu-satunya teman yang cukup peduli untuk membuatkan website ini, adalah makhluk semi-mitos yang pernah menghuni bangku SMK yang sama. Namun takdir berkata lain: ijazah palsu menghancurkan karir SMK-nya, dan sang ayah—dalam kepanikan tingkat dewa—memasukkannya ke <strong>Pondok Pesantren Darussalam Martapura</strong>.
+        </p>
+        <p style="color:var(--text-dim); margin-top:10px;">
+            Apakah ini pilihan Ikymau? Tidak. Apakah ini membuatnya lebih religius? Mungkin. Apakah ini menghentikannya dari nge-wibu? <strong>SAMA SEKALI TIDAK.</strong>
+        </p>
+        <p style="color:var(--text-dim); margin-top:10px;">
+            Sekarang dia menyandang status <strong>santri awaliyah</strong>—atau kelas berapa tepatnya, wallahualam, yang jelas dia masih di sana, masih makan banyak, masih belum bisa pull up, dan masih mengkhayal menjadi Ayanokouji Kiyotaka.
+        </p>
+    </div>
+
+    <!-- SECTION 2: PARADOKS BULKING -->
+    <div class="card card-gold">
+        <div class="card-header">
+            <div class="card-icon">🍔</div>
+            <div><div class="card-title">Paradoks Bulking: Makan Banyak, Otot Tidak Hadir</div><div class="card-subtitle">Workout Katanya, Jajajan Tetap Jalan</div></div>
+        </div>
+        <ul class="roast-list">
+            <li class="gold">Ngaku "bulking" tapi yang membesar hanya perut, bukan bisep.</li>
+            <li>Setiap ditanya progress workout, jawabannya: <em>"Nunggu alat lengkap dulu."</em> — Alat yang dimaksud tidak pernah dibeli.</li>
+            <li class="blue">Program "workout" yang pernah terlaksana: angkat piring ke dapur. Itupun jarang.</li>
+            <li>Makan jajanan cepat saji setiap hari, tapi menyebutnya "surplus kalori."</li>
+            <li class="gold">Pernah diajak jogging. Alasannya: <em>"Nanti aja, abis ujan."</em> — Padahal cuaca cerah.</li>
+            <li>Sit up? Tidak bisa. Pull up? Jangankan satu, menggantung saja lima detik langsung jatuh.</li>
+            <li class="purple">Lompat tali ditolak karena "berisik di rumah." — Bro, kalau lo lompat tali sampe rumah roboh pun, itu artinya lo BERHASIL bakar kalori.</li>
+            <li>Definisi "workout" dia: scrolling TikTok video gym sambil rebahan.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 3: WIBU CORNER -->
+    <div class="waifu-card">
+        <div class="waifu-name">🦋 Shinobu Kocho 🦋</div>
+        <p style="color:var(--text-dim); margin-top:8px;">Waifu Resmi. No Debate. Tidak Bisa Diganggu Gugat.</p>
+        <p style="color:var(--text-dim); font-size:0.85em; margin-top:8px;">
+            Ikymau memiliki obsesi tidak sehat terhadap Shinobu Kocho dari <em>Kimetsu no Yaiba</em>.
+            Wallpaper HP? Shinobu. Nada dering? Shinobu berkata "Ara ara." Mimpi basah? Kemungkinan besar Shinobu.
+        </p>
+        <p style="color:var(--text-dim); font-size:0.85em; margin-top:6px;">
+            Ironisnya, Shinobu adalah Hashira Serangga—lincah, cepat, dan mematikan. Sementara Ikymau...
+            ngos-ngosan naik tangga 5 anak tangga. Shinobu would be disappointed.
+        </p>
+    </div>
+
+    <!-- SECTION 4: AYANOKOUJI WANNABE -->
+    <div class="card card-blue">
+        <div class="card-header">
+            <div class="card-icon">🧠</div>
+            <div><div class="card-title">Ayanokouji Kiyotaka Wannabe</div><div class="card-subtitle">"Semua Orang Adalah Alat" — Tapi Alatnya Karatan</div></div>
+        </div>
+        <ul class="roast-list">
+            <li class="blue">Sering mengutip Ayanokouji: <em>"Semua orang hanyalah alat."</em> — Sementara dia sendiri alatnya berkarat.</li>
+            <li>Berpura-pura jenius di depan orang, tapi tidak bisa menjawab pertanyaan matematika dasar.</li>
+            <li class="gold">Mengaku "master manipulasi," tapi gagal membujuk temannya sendiri untuk traktir bakso.</li>
+            <li>Gaya bicara dibuat sedingin mungkin. Hasilnya: dikira lagi sakit tenggorokan.</li>
+            <li class="purple">Mimpi: menjadi dalang di balik layar seperti Ayanokouji. Realita: jadi background character.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 5: REALITA VS FANTASI -->
+    <div class="card card-purple">
+        <div class="card-header">
+            <div class="card-icon">⚡</div>
+            <div><div class="card-title">Harapan vs Kenyataan</div><div class="card-subtitle">Tabel Perbandingan yang Menyakitkan</div></div>
+        </div>
+        <table class="comparison-table">
+            <thead><tr><th>Aspek</th><th>Yang Dia Pikirkan</th><th>Kenyataan</th></tr></thead>
+            <tbody>
+                <tr><td>Fisik</td><td>Ayanokouji (atletis, sixpack)</td><td style="color:var(--red);">Tidak bisa sit up 1 kali</td></tr>
+                <tr><td>Kecerdasan</td><td>Jenius manipulatif</td><td style="color:var(--orange);">Tidak tahu rumus luas lingkaran</td></tr>
+                <tr><td>Percintaan</td><td>Shinobu Kocho jatuh cinta</td><td style="color:var(--red);">Shinobu adalah karakter fiksi</td></tr>
+                <tr><td>Konten</td><td>Content creator sukses</td><td style="color:var(--orange);">"Nunggu barang lengkap" — sudah 8 bulan</td></tr>
+                <tr><td>Olahraga</td><td>Bulking, workout, atletis</td><td style="color:var(--red);">Jajanan cepat saji + rebahan</td></tr>
+                <tr><td>Karir</td><td>Pengusaha / tokoh besar</td><td style="color:var(--orange);">Santri (bukan pilihan sendiri)</td></tr>
+                <tr><td>Lari</td><td>Bisa balapan</td><td style="color:var(--red);">Kalah sama pembuat website ini</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SECTION 6: ALASAN MENUNDA -->
+    <div class="card card-orange">
+        <div class="card-header">
+            <div class="card-icon">📅</div>
+            <div><div class="card-title">Katalog Alasan Menunda Olahraga</div><div class="card-subtitle">Edisi Spesial: Dikumpulkan Selama Berbulan-bulan</div></div>
+        </div>
+        <ul class="roast-list">
+            <li>"Nanti aja, abis ujan." — Cuaca cerah. Selama 3 hari berturut-turut.</li>
+            <li class="blue">"Alat belum lengkap." — Alat yang dimaksud: matras yoga Rp 35.000. Belum dibeli sejak 2023.</li>
+            <li>"Lagi males." — Alasan paling jujur. Dihargai kejujurannya.</li>
+            <li class="gold">"Lompat tali berisik, nanti tetangga complain." — Tetangga tidak peduli. Yang peduli hanya gravitasi.</li>
+            <li>"Sit up bikin punggung sakit." — Punggung sakit karena TIDAK PERNAH sit up.</li>
+            <li class="purple">"Nanti aja pas udah kurus." — LOGIKA TINGKAT DEWA.</li>
+            <li>"Gak ada temen." — Ada temen yang ngajak. Ditolak.</li>
+            <li class="blue">"Hari ini cheat day." — Cheat day setiap hari = bukan cheat day. Itu gaya hidup.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 7: MAKANAN UMPAN -->
+    <div class="card card-teal">
+        <div class="card-header">
+            <div class="card-icon">🍢</div>
+            <div><div class="card-title">Umpan Strategis: Batagor & Sate</div><div class="card-subtitle">Satu-satunya Cara Mengeluarkan Ikymau dari Sara
